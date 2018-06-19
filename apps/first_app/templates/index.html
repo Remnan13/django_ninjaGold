@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ninja Gold Django</title>
+</head>
+<body>
+	<div id="goldCount">
+		<h2>Gold Count: {{ request.session.goldCount }}</h2>
+	</div>
+
+	<div id="goldNode">
+		<h2>Blood Lotus Master</h2>
+		<h3>It is said that when the blood lotus blooms, the night itself holds its breath. Cloaked in heavy scarlet cloth and midnight black leather, this master of the graceful art of death arrives to practice his bloody trade. Your clients, expecting complete anonymity, will allow no survivors.</h3>
+		<h5>(earns 50 to 200 gold coins)</h5>
+		<form action='/process_gold' method="post">
+			{% csrf_token %}
+			<input type="hidden" name="earn" value="reap">
+			<button type="submit" name="reap">収める - Reap</button>
+		</form>
+	</div>
+
+	<div id="goldNode">
+		<h2>Shadow Dance Troupe</h2>
+		<h3>Since time immemorial, the art of theater and drama has infused cultures with a degree of comedy and tragedy. For the Shadow Dance Troupe, the latter is always center-stage. Your clients need some locals reminded that intimidation need not be delivered with brute force -- indeed, the Shadow Dance ends with whispered laughter, a sympathetic smile, and a sanguine caress.</h3>
+		<h5>(earns 35 to 50 gold coins)</h5>
+		<form action='/process_gold' method = "post">
+			{% csrf_token %}
+			<input type="hidden" name="earn" value="weave">
+			<button type = "submit" name = "weave">織る - Weave</button>
+		</form>
+	</div>
+
+	<div id="goldNode">
+		<h2>Necromancy</h2>
+		<h3>Those who flee this mortal coil often do so with loose ends trailing in their wake. Some can trail so heavily that they anchor the dead to their past life. Sacrifice and dark rituals allow this spectral wanderer to resurrect spirits of the indebted departed. Her fees are staggering -- so be sure the soul she siphons isn't your own. </h3>
+		<h5>(earns -200 to 200 gold coins)</h5>
+		<form action='/process_gold' method="post">
+			{% csrf_token %}
+			<input type="hidden" name="earn" value="summon">
+			<button type = "submit" name="summon">召喚 - Summon</button>
+		</form>
+	</div>
+
+	<div id="goldNode">
+		<h2>Clan War!</h2>
+		<h3>When children hear trees rustling on a windless day, they know the canopy is full of metal, poison, and death. Your clan treads a fine line between the order of death and chaos of life -- crossing it can be a key to fortune or destruction. Will you dare to cross when the time comes?</h3>
+		<h5>(earns -2000 to 2000 gold coins)</h5>
+		<form action='/process_gold' method="post">
+			{% csrf_token %}
+			<input type="hidden" name="earn" value="summon">
+			<button type="submit" name="war">影の戦争 - Shadow War</button>
+		</form>
+	</div>
+	</hr>
+	<div id="chronicleBox">
+		<ul>
+		{% for entry in request.session.messages_list %}
+			<li color="{{messages_list.color}}">{{messages_list.message}}</li>
+		{% endfor %}
+		</ul>
+	</div>
+</body>
+</html>
