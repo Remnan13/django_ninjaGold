@@ -48,17 +48,15 @@
 		<h5>(earns -2000 to 2000 gold coins)</h5>
 		<form action='/process_gold' method="post">
 			{% csrf_token %}
-			<input type="hidden" name="earn" value="summon">
+			<input type="hidden" name="earn" value="war">
 			<button type="submit" name="war">影の戦争 - Shadow War</button>
 		</form>
 	</div>
 	</hr>
 	<div id="chronicleBox">
-		<ul>
-		{% for entry in request.session.messages_list %}
-			<li color="{{messages_list.color}}">{{messages_list.message}}</li>
-		{% endfor %}
-		</ul>
+	{% for entry in request.session.messages_list %}
+		<p style = "color:{{entry.color}};">{{entry.message}}</p>
+	{% endfor %}
 	</div>
 </body>
 </html>

@@ -17,49 +17,49 @@ def index(request):
 def process_gold(request):
 	event_list = request.session['messages_list']
 	time = datetime.now()
-	event = {
-		# 'message': "",
-		# 'color': ""
-	}
+	event = {}
 
 	if request.POST['earn'] == 'reap':
-		request.session['num'] = random.randint(50,200)
-		request.session['goldCount'] += request.session['num']
-		now = datetime.now()
-		if request.session['num'] >= 0:
-			event['message'] = str(f"Blood flows out, gold flows in. Collected: {{int(request.session.num)}} gold coins. {{request.session.now}}")
-			event['color'] = 'green'
+		num = random.randint(50,200)
+		request.session['goldCount'] += num
+		if num >= 0:
+			event['message'] = f"Blood flows out, gold flows in. Collected: {num} gold coins. {time}"
+			event['color'] = "green"
 		else:
-			event['message'] = str("Whispers of failure and betrayal. Lost: "+request.session['num']+" gold coins. ") 
-			event['color'] = str('red')
+			event['message'] = f"Whispers of failure and betrayal. Lost: {num} gold coins. {time}" 
+			event['color'] = "red"
 
 
 	if request.POST['earn'] == 'weave':
-		request.session['num'] += random.randint(35,50)
-		request.session['goldCount'] += request.session['num']
-		now = datetime.now()
-		if request.session['num'] >= 0:
-			messages.success(request, "Blood flows out, gold flows in. Collected: "+str(request.session['num'])+" gold coins. ")
+		num = random.randint(35,50)
+		request.session['goldCount'] += num
+		if num >= 0:
+			event['message'] = f"Blood flows out, gold flows in. Collected: {num} gold coins. {time}"
+			event['color'] = "green"
 		else:
-			messages.warning(request, "Whispers of failure and betrayal. Lost: "+str(request.session['num'])+" gold coins. ") 
+			event['message'] = f"Whispers of failure and betrayal. Lost: {num} gold coins. {time}" 
+			event['color'] = 'red' 
 
 	if request.POST['earn'] == 'summon':
-		request.session['num'] += random.randint(-200,200)
-		request.session['goldCount'] += request.session['num']
-		now = datetime.now()
-		if request.session['num'] >= 0:
-			messages.success(request, "Blood flows out, gold flows in. Collected: "+str(request.session['num'])+" gold coins. ")
+		num = random.randint(-200,200)
+		request.session['goldCount'] += num
+		if num >= 0:
+			event['message'] = f"Blood flows out, gold flows in. Collected: {num} gold coins. {time}"
+			event['color'] = "green"
 		else:
-			messages.warning(request, "Whispers of failure and betrayal. Lost: "+str(request.session['num'])+" gold coins. ") 
+			event['message'] = f"Whispers of failure and betrayal. Lost: {num} gold coins. {time}" 
+			event['color'] = 'red'
 
 	if request.POST['earn'] == 'war':
-		request.session['num'] += random.randint(-2000,2000)
-		request.session['goldCount'] += request.session['num']
-		now = datetime.now()
-		if request.session['num'] >= 0:
-			messages.success(request, "Blood flows out, gold flows in. Collected: "+str(request.session['num'])+" gold coins. ")
+		num = random.randint(-2000,2000)
+		request.session['goldCount'] += num
+		if num >= 0:
+			event['message'] = f"Blood flows out, gold flows in. Collected: {num} gold coins. {time}"
+			event['color'] = "green"
 		else:
-			messages.warning(request, "Whispers of failure and betrayal. Lost: "+str(request.session['num'])+" gold coins. ") 
+			event['message'] = f"Whispers of failure and betrayal. Lost: {num} gold coins. {time}" 
+			event['color'] = 'red'
+
 	event_list.append(event)
 	request.session['messages_list'] = event_list
 	print(request.session['messages_list'])
